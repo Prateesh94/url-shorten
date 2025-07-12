@@ -56,43 +56,6 @@ curl -X DELETE http://localhost:8080/shorten/{shortCode}
 curl -X GET http://localhost:8080/shorten/{shortCode}/stats
 ```
 
-## Setup Instructions
-
-1. **Install Go** (version 1.18+ recommended)
-2. **Install PostgreSQL** and create a database named `postgres`.
-3. Update PostgreSQL connection parameters in `url/data.go` if needed:
-   ```
-   host     = "localhost"
-   port     = 5432
-   user     = "postgres"
-   password = "admin"
-   dbname   = "postgres"
-   ```
-4. Create the required table:
-
-   ```sql
-   CREATE TABLE url (
-      id SERIAL PRIMARY KEY,
-      short VARCHAR(20) UNIQUE,
-      original TEXT NOT NULL,
-      created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-      updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-      hits INTEGER DEFAULT 0
-   );
-   ```
-
-5. **Install dependencies:**
-   ```
-   go get github.com/gorilla/mux
-   go get github.com/lib/pq
-   ```
-
-6. **Run the server:**
-   ```
-   go run main.go
-   ```
-   The server will start on port 8080.
-
 ## Contributing
 
 Feel free to fork the repository and submit pull requests for improvements or bug fixes.
